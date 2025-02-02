@@ -9,6 +9,8 @@ import {
   ClockIcon,
 } from "@heroicons/react/24/solid";
 
+export const maxDuration = 60;
+
 export default function ProxyChecker() {
   const [input, setInput] = useState("");
   const [results, setResults] = useState<ProxyResult[]>([]);
@@ -95,13 +97,12 @@ export default function ProxyChecker() {
         if (done) break;
 
         buffer += decoder.decode(value, { stream: true });
-        const events = buffer.split("\n\n");
+        const events = buffer.split("\n");
         buffer = events.pop() || "";
 
         for (const event of events) {
-          const data = event.replace("data: ", "");
           try {
-            const result: ProxyResult = JSON.parse(data);
+            const result: ProxyResult = JSON.parse(event);
             setResults((prev) => [...prev, result]);
           } catch (error) {
             console.error("Error parsing event:", error);

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { checkProxies } from "@/lib/proxyCheck";
 import { CheckRequest } from "@/lib/types";
 
+export const maxDuration = 60;
+
 export async function POST(request: Request) {
   try {
     const { proxies, timeout, concurrent }: CheckRequest = await request.json();
@@ -18,7 +20,7 @@ export async function POST(request: Request) {
     const encoder = new TextEncoder();
 
     checkProxies(proxies, { timeout, concurrent }, (result) => {
-      writer.write(encoder.encode(`data: ${JSON.stringify(result)}\n\n`));
+      writer.write(encoder.encode(`${JSON.stringify(result)}\n`));
     }).finally(() => writer.close());
 
     return new Response(stream.readable, {
