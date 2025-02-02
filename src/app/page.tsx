@@ -85,7 +85,7 @@ export default function Home() {
 
         <div className="relative group">
           <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl opacity-25 blur transition-all duration-1000 group-hover:opacity-40" />
-          <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden mx-0 sm:mx-4">
+          <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden mx-0">
             <ProxyChecker />
           </div>
         </div>

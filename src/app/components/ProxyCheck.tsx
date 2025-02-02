@@ -126,9 +126,7 @@ export default function ProxyChecker() {
 
   return (
     <div
-      className={`min-h-screen p-6 transition-colors duration-300 ${
-        isDarkMode ? "dark bg-gray-900" : "bg-gray-50"
-      }`}
+      className="max-h-fit p-6 transition-colors duration-300 dark:bg-gray-800 bg-white"
     >
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
@@ -137,7 +135,7 @@ export default function ProxyChecker() {
           </h1>
           <button
             onClick={toggleDarkMode}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
           >
             {isDarkMode ? (
               <SunIcon className="h-6 w-6 text-yellow-400" />
@@ -147,7 +145,7 @@ export default function ProxyChecker() {
           </button>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6 transition-all duration-300 hover:shadow-xl">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 mb-6 transition-all duration-300">
           <div className="mb-6">
             <label className="block mb-3 font-medium text-gray-700 dark:text-gray-300">
               Proxies (IP:PORT per line)
