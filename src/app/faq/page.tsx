@@ -1,7 +1,7 @@
 export default function FAQSection() {
   return (
     <main className="container mx-auto px-4 py-12 max-w-3xl">
-      <h2 className="text-3xl font-bold mb-8 animate-slide-up md:text-xl">
+      <h2 className="text-3xl font-bold mb-8 animate-slide-up md:text-xl text-gray-600 dark:text-gray-300">
         Frequently Asked Questions
         <span className="block w-20 h-2 bg-blue-600 mt-2 rounded-full" />
       </h2>
