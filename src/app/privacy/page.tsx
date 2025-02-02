@@ -1,7 +1,7 @@
 export default function PrivacyPage() {
   return (
     <main className="container mx-auto px-4 py-12 max-w-3xl">
-      <h1 className="text-3xl font-bold mb-8 animate-slide-up text-gray-600 dark:text-gray-300">
+      <h1 className="md:text-3xl font-bold mb-8 animate-slide-up text-2xl text-gray-600 dark:text-gray-300">
         Privacy Policy
         <span className="block w-20 h-2 bg-blue-600 mt-2 rounded-full" />
       </h1>
