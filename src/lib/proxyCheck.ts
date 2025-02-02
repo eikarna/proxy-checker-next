@@ -5,6 +5,10 @@ import axios from "axios";
 const DEFAULT_TIMEOUT = 5000;
 const DEFAULT_CONCURRENT = 5;
 
+export const config = {
+    runtime: "edge",
+};
+
 export async function checkProxies(
   proxies: string[],
   options: { timeout?: number; concurrent?: number } = {},
