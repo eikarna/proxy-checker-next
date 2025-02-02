@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ProxyResult } from "@/lib/types";
 import {
   SunIcon,
@@ -19,9 +19,17 @@ export default function ProxyChecker() {
   const [concurrent, setConcurrent] = useState(5);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Add useEffect to sync dark mode
+  useEffect(() => {
+    const isDark = document.documentElement.classList.contains("dark");
+    setIsDarkMode(isDark);
+  }, []);
+
   const toggleDarkMode = useCallback(() => {
-    setIsDarkMode(!isDarkMode);
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
     document.documentElement.classList.toggle("dark");
+    localStorage.setItem("theme", newMode ? "dark" : "light");
   }, [isDarkMode]);
 
   const exportResults = (format: "csv" | "txt") => {
@@ -153,7 +161,9 @@ export default function ProxyChecker() {
                     ? "bg-gray-900 border-gray-700 text-gray-300"
                     : "border-gray-300 text-gray-700"
                 }`}
-              placeholder="127.0.0.1:8080\n192.168.1.1:3128"
+              placeholder={
+                "127.0.0.1:8080\n192.168.1.1:3128\n172.16.0.1:80\n..."
+              }
             />
           </div>
 
@@ -313,28 +323,28 @@ export default function ProxyChecker() {
                 </tbody>
               </table>
             </div>
+            <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700 flex justify-between items-center">
+              <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                Results ({results.filter((r) => r.status === "OK").length}/
+                {results.length} Working)
+              </h2>
+              <div className="space-x-3">
+                <button
+                  onClick={() => exportResults("csv")}
+                  className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  Download CSV
+                </button>
+                <button
+                  onClick={() => exportResults("txt")}
+                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Download TXT
+                </button>
+              </div>
+            </div>
           </div>
         )}
-        <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700 flex justify-between items-center">
-          <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-            Results ({results.filter((r) => r.status === "OK").length}/
-            {results.length} Working)
-          </h2>
-          <div className="space-x-3">
-            <button
-              onClick={() => exportResults("csv")}
-              className="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors"
-            >
-              Download CSV
-            </button>
-            <button
-              onClick={() => exportResults("txt")}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Download TXT
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
